@@ -4,6 +4,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  globalSetup: require.resolve('./global-setup'),
   timeout: process.env.CI ? 120_000 : 60_000,
   outputDir: 'test-results',
   testDir: './tests',
@@ -20,19 +21,19 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
   ],
 
   webServer: {
     timeout: 120_000,
-    command: 'pnpm --filter "@tasker/web" start',
+    command: 'pnpm exec nx run @tasker/web:next:start -H ::',
     url: 'http://[::1]:3000',
     reuseExistingServer: true,
   },

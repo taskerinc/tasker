@@ -11,15 +11,15 @@
     "./toast": "./src/toast.tsx"
   },
   "scripts": {
-    "lint": "eslint .",
-    "test": "vitest"
+    "lint": "nx eslint:lint",
+    "test": "nx vite:test"
   },
   "dependencies": {
     "@headlessui/react": "^2.0.3",
     "@heroicons/react": "^2.1.3",
     "@tasker/database": "workspace:*",
     "date-fns": "^3.6.0",
-    "next": "^14.2.3"
+    "next": "^14.1.1"
   },
   "devDependencies": {
     "@types/node": "^20.12.11",

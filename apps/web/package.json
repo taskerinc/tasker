@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "nx next:dev",
+    "build": "nx next:build",
+    "start": "nx next:start"
   },
   "dependencies": {
     "@nivo/line": "^0.86.0",
@@ -27,5 +27,14 @@
     "@types/node": "^20.12.11",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19"
+  },
+  "nx": {
+    "targets": {
+      "next:build": {
+        "dependsOn": [
+          "^generate"
+        ]
+      }
+    }
   }
 }

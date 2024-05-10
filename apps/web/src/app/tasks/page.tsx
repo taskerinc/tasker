@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { CreatedTasks, MyTasks } from '@tasker/tasks-widgets';
 import { db } from '@tasker/database';
 import { getUserData } from '../api/auth/utils';
+import type { AssigneesOnTasksWithTasks } from '@tasker/database/model';
 
 export default async function Tasks(): Promise<JSX.Element> {
   const cookieStore = cookies();
@@ -19,7 +20,7 @@ export default async function Tasks(): Promise<JSX.Element> {
         task: true,
       },
     })
-  ).map((x) => x.task);
+  ).map((x: AssigneesOnTasksWithTasks) => x.task);
   const createdTasks = await db.task.findMany({
     where: {
       deleted: false,

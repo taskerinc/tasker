@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { db } from '@tasker/database';
 import { Card } from '@tasker/ui/card';
+import type { ProjectWithTasks } from '@tasker/database/model';
 
 export const revalidate = 0;
 
@@ -14,7 +15,7 @@ export default async function ProjectsPage(): Promise<JSX.Element> {
     <>
       <h2 className="text-xl font-semibold">Projects</h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {projects.map((p) => (
+        {projects.map((p: ProjectWithTasks) => (
           <Card key={p.slug} href={`/projects/${p.slug}`} title={p.name}>
             <div data-testid="project-item" className="flex items-center">
               <span className="flex-1">{p.name}</span>

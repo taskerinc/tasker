@@ -1,0 +1,40 @@
+name: CI
+on:
+  push:
+    branches:
+      # Change this if your primary branch is not main
+      - main
+  pull_request:
+
+# Needed for nx-set-shas when run on the main branch
+permissions:
+  actions: read
+  contents: read
+
+env:
+  DEBUG: pw:webserver
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+      # This line enables distribution
+      - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="e2e-ci"
+      - name: Install dependencies
+        run: pnpm install
+      - uses: nrwl/nx-set-shas@v4
+      #      - run: npx nx-cloud record -- nx format:check
+      #      - run: pnpm exec nx affected -t eslint:lint,next:build,vite:test --parallel=4
+      - run: pnpm exec nx affected -t e2e-ci --parallel=1

@@ -6,7 +6,7 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "nx eslint:lint"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.3",

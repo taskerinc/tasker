@@ -16,6 +16,8 @@ test('Login Test: Bad credentials', async ({ page }) => {
 test('Login Test: Good credentials', async ({ page }) => {
   await login(page);
 
+  await page.waitForTimeout(5000);
+
   await expect(page).toHaveURL('/dashboard');
 });
 
@@ -24,6 +26,8 @@ test('Logout and Re-Login Test', async ({ page }) => {
     email: 'alice@tasker.io',
     password: '123456',
   });
+
+  await page.waitForTimeout(5000);
 
   await expect(page).toHaveURL('/dashboard');
 

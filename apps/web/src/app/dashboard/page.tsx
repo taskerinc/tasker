@@ -10,6 +10,7 @@ import { getUserData } from '../api/auth/utils';
 import { cookies } from 'next/headers';
 import { db } from '@tasker/database';
 import { CreateTaskButton } from '@tasker/ui/task';
+import type { AssigneesOnTasks } from '@tasker/database/model';
 
 export const metadata = {
   title: 'Dashboard | Tasker',
@@ -30,7 +31,7 @@ export default async function Page(): Promise<JSX.Element> {
         assigneeId: userData.id,
       },
     })
-  ).map((a) => a.taskId);
+  ).map((a: AssigneesOnTasks) => a.taskId);
   const tasks = await db.task.findMany({
     where: {
       deleted: false,

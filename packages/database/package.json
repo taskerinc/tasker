@@ -22,5 +22,15 @@
   "devDependencies": {
     "@types/node": "^20.12.11",
     "prisma": "^5.13.0"
+  },
+  "nx": {
+    "targets": {
+      "generate": {
+        "inputs": [
+          "{projectRoot}/schema.prisma"
+        ],
+        "cache": true
+      }
+    }
   }
 }

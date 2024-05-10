@@ -7,8 +7,8 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "eslint .",
-    "test": "vitest"
+    "lint": "nx eslint:lint",
+    "test": "nx vite:test"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.3",

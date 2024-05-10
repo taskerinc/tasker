@@ -8,5 +8,7 @@ test('Projects Tests: List page', async ({ page }) => {
 
   const projectCount = await page.locator('[data-testid=project-item]').count();
 
+  await page.waitForTimeout(10_000);
+
   expect(projectCount).toEqual(2);
 });
