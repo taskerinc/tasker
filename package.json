@@ -6,6 +6,9 @@
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "format:check": "prettier --check \"**/*.{js,ts,tsx,md}\""
   },
+  "nx": {
+    "includedScripts": ["format:check"]
+  },
   "devDependencies": {
     "@eslint/js": "^9.2.0",
     "@testing-library/react": "^15.0.7",
