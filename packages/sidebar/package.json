@@ -6,7 +6,7 @@
     ".": "./src/sidebar.tsx"
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "nx eslint:lint"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.3",

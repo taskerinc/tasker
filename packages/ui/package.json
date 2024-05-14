@@ -11,7 +11,7 @@
     "./toast": "./src/toast.tsx"
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "nx eslint:lint",
     "test": "vitest"
   },
   "dependencies": {
