@@ -5,15 +5,15 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   globalSetup: require.resolve('./global-setup'),
-  timeout: process.env.CI ? 120_000 : 60_000,
+  timeout: 60_000,
   outputDir: 'test-results',
   testDir: './tests',
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: 0,
   workers: 1,
   reporter: 'html',
   use: {
-    baseURL: 'http://[::1]:3000',
+    baseURL: process.env.CI ? 'http://localhost:3000' : 'http://[::1]:3000',
   },
 
   projects: [
@@ -21,20 +21,14 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
   ],
 
   webServer: {
     timeout: 120_000,
-    command: 'pnpm exec nx run @tasker/web:next:start -H ::',
-    url: 'http://[::1]:3000',
-    reuseExistingServer: true,
+    command: process.env.CI
+      ? 'pnpm exec nx run @tasker/web:next:start'
+      : 'pnpm exec nx run @tasker/web:next:start -H ::',
+    url: process.env.CI ? 'http://localhost:3000' : 'http://[::1]:3000',
+    reuseExistingServer: !!process.env.CI,
   },
 });
