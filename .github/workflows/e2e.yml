@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -30,9 +32,9 @@ jobs:
       - name: Run Checks/Lint/Build
         run: |
           pnpm format:check
-          pnpm exec nx run-many -t lint test build --parallel=4
+          pnpm exec nx affected -t lint test build --parallel=4
       - name: Run Playwright tests
-        run: pnpm exec nx run-many -t e2e-ci --parallel=1
+        run: pnpm exec nx affected -t e2e-ci --parallel=1
       - uses: actions/upload-artifact@v4
         if: always()
         with:
