@@ -23,14 +23,16 @@ jobs:
         run: pnpm install
       - name: Install Playwright Browsers
         run: pnpm --filter "@tasker/e2e-web" exec playwright install --with-deps
+
+      - uses: nrwl/nx-set-shas@v4
+      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
+      # - run: pnpm exec nx-cloud record -- echo Hello World
       - name: Run Checks/Lint/Build
         run: |
           pnpm format:check
-          pnpm lint
-          pnpm --filter "@tasker/web" build
-          pnpm --filter "@tasker/*" test
+          pnpm exec nx run-many -t lint test build --parallel=4
       - name: Run Playwright tests
-        run: pnpm --filter "@tasker/e2e-web" e2e
+        run: pnpm exec nx run-many -t e2e-ci --parallel=1
       - uses: actions/upload-artifact@v4
         if: always()
         with:
