@@ -24,7 +24,7 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm --filter "@tasker/e2e-web" exec playwright install --with-deps
       - name: Run Checks/Lint/Build
-        run: pnpm exec nx run-many -t format:check,lint,build,test
+        run: pnpm exec nx run-many -t format:check,lint,build,test --parallel=4
       - name: Seed Database
         run: pnpm --filter "@tasker/database" seed
       - name: Run Playwright tests
