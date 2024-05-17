@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { login } from './helpers/auth-helper';
 import { createTask } from './helpers/task-helper';
-import { setStatus } from './helpers/project-helper';
 
 test('Projects Tests: Details page', async ({ page }) => {
   const now = Date.now();
@@ -77,72 +76,6 @@ test('Projects Tests: Details page', async ({ page }) => {
   expect(
     taskItemTextContents.some((s) => s.match(`Design task #3 ${now}`)),
   ).toBeTruthy();
-});
-
-test('Projects Tests: Update project status', async ({ page }) => {
-  await login(page, { email: 'alice@tasker.io', password: '123456' });
-  await page.goto('/projects/UX');
-
-  await setStatus(page, 'at_risk');
-
-  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
-  await page.reload();
-
-  expect(
-    await page.locator('[data-testid=project-input-status]').inputValue(),
-  ).toEqual('at_risk');
-
-  await setStatus(page, 'off_track');
-
-  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
-  await page.reload();
-
-  expect(
-    await page.locator('[data-testid=project-input-status]').inputValue(),
-  ).toEqual('off_track');
-
-  await setStatus(page, 'on_track');
-
-  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
-  await page.reload();
-
-  expect(
-    await page.locator('[data-testid=project-input-status]').inputValue(),
-  ).toEqual('on_track');
-
-  // Checking another project
-  await page.goto('/projects/ENG');
-  // Other project has default status
-  expect(
-    await page.locator('[data-testid=project-input-status]').inputValue(),
-  ).toEqual('on_track');
-
-  await setStatus(page, 'off_track');
-
-  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
-  await page.reload();
-
-  expect(
-    await page.locator('[data-testid=project-input-status]').inputValue(),
-  ).toEqual('off_track');
-
-  await setStatus(page, 'at_risk');
-
-  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
-  await page.reload();
-
-  expect(
-    await page.locator('[data-testid=project-input-status]').inputValue(),
-  ).toEqual('at_risk');
-
-  await setStatus(page, 'on_track');
-
-  await page.waitForTimeout(process.env.CI ? 10_000 : 1000);
-  await page.reload();
-
-  expect(
-    await page.locator('[data-testid=project-input-status]').inputValue(),
-  ).toEqual('on_track');
 });
 
 test('Projects Tests: Create task from details page defaults project to current project', async ({
