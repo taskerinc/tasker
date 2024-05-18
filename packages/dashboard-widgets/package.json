@@ -15,7 +15,7 @@
     "@nivo/line": "0.85.1",
     "@tasker/database": "workspace:*",
     "@tasker/ui": "workspace:*",
-    "next": "^14.1.1"
+    "next": "^14.2.3"
   },
   "devDependencies": {
     "@types/node": "^20.12.11",
