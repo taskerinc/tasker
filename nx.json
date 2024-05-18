@@ -35,7 +35,7 @@
       }
     }
   ],
-  "cacheBust": 1,
+  "cacheBust": 2,
   "nxCloudAccessToken": "NTQ3OThmMzctYjE2ZC00MjYxLWI2MmQtY2YzZTJmYTJkMDA4fHJlYWQtd3JpdGU=",
   "nxCloudUrl": "https://staging.nx.app"
 }
