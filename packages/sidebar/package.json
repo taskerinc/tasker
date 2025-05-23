@@ -6,11 +6,11 @@
     ".": "./src/sidebar.tsx"
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "nx eslint:lint"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.3",
-    "next": "^14.1.1"
+    "next": "^14.2.3"
   },
   "devDependencies": {
     "@types/node": "^20.12.11",
