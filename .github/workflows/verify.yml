@@ -33,7 +33,9 @@ jobs:
           pnpm format:check
           pnpm exec nx affected -t eslint:lint vite:test next:build --parallel=4
       - name: Run Playwright tests
-        run: pnpm exec nx affected -t e2e-ci --parallel=1
+        run: |
+          pnpm exec nx affected -t e2e-ci --parallel=1
+          ls -lsa e2e/web/*
       - uses: actions/upload-artifact@v4
         if: always()
         with:
